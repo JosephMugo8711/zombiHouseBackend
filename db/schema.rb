@@ -16,7 +16,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_184613) do
     t.string "fullname"
     t.string "email"
     t.string "contact"
-    t.string "role"
+    t.string "role", default: "admin", null: false
     t.string "avatar"
     t.string "password_digest"
     t.datetime "created_at", null: false
@@ -29,7 +29,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_184613) do
     t.string "email"
     t.string "contact"
     t.integer "budget"
-    t.string "role"
+    t.string "role", default: "buyer", null: false
     t.string "subscription_package"
     t.string "password_digest"
     t.string "avatar"
@@ -41,12 +41,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_184613) do
     t.string "location"
     t.decimal "price"
     t.integer "seller_id", null: false
+    t.integer "buyer_id", null: false
     t.string "status"
     t.string "property_type"
     t.text "description"
     t.integer "size_in_sqft"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["buyer_id"], name: "index_properties_on_buyer_id"
     t.index ["seller_id"], name: "index_properties_on_seller_id"
   end
 
@@ -57,11 +59,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_08_184613) do
     t.string "email"
     t.string "password_digest"
     t.string "subscription_package"
-    t.string "role"
+    t.string "role", default: "seller", null: false
     t.string "avatar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "properties", "buyers"
   add_foreign_key "properties", "sellers"
 end
