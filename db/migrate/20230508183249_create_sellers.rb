@@ -7,7 +7,7 @@ class CreateSellers < ActiveRecord::Migration[7.0]
       t.string :email
       t.string :password_digest
       t.string :subscription_package
-      t.string :role
+      t.string :role, default: "seller", null: false
       t.string :avatar
 
       t.timestamps

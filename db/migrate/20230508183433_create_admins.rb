@@ -5,7 +5,7 @@ class CreateAdmins < ActiveRecord::Migration[7.0]
       t.string :fullname
       t.string :email
       t.string :contact
-      t.string :role
+      t.string :role, default: "admin", null: false
       t.string :avatar
       t.string :password_digest
 

@@ -4,6 +4,7 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.string :location
       t.decimal :price
       t.references :seller, null: false, foreign_key: true
+      t.references :buyer, null: false, foreign_key: true
       t.string :status
       t.string :property_type
       t.text :description
