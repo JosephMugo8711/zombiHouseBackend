@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: MyString
+  buyer: one
+  seller: one
+  admin: one
+  subscription_package: one
+  payment_status: MyString
+  payment_method: MyString
+  mpesa_transaction_id: MyString
+
+two:
+  amount: MyString
+  buyer: two
+  seller: two
+  admin: two
+  subscription_package: two
+  payment_status: MyString
+  payment_method: MyString
+  mpesa_transaction_id: MyString
