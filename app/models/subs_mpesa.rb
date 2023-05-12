@@ -1,0 +1,2 @@
+class SubsMpesa < ApplicationRecord
+end

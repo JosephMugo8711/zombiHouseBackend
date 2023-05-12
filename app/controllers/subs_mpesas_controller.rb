@@ -1,0 +1,2 @@
+class SubsMpesasController < ApplicationController
+end
