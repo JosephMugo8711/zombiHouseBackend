@@ -12,7 +12,8 @@ Rails.application.configure do
   config.eager_load = false
 
   # Acess rails app from ngrok
-  config.hosts << /[a-z0-9]+\.ngrok\.io/
+  #config.hosts << /[a-z0-9]+\.ngrok\.io/
+  config.hosts.clear
 
   # Show full error reports.
   config.consider_all_requests_local = true
