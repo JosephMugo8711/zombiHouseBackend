@@ -13,10 +13,20 @@ class BuyersController < ApplicationController
         render json: buyer, status: :ok
     end
 
-    def create
-        buyer = Buyer.create!(buyer_params)
-        render json: buyer, status: :created
+    # def create
+    #     buyer = Buyer.create!(buyer_params)
+    #     render json: buyer, status: :created
+    # end
+    
+  def create
+    @buyer = Buyer.create(buyer_params)
+    if @buyer.valid?
+      @token = encode_token(buyer_id: @buyer.id)
+      render json: { buyer: BuyerSerializer.new(@buyer), jwt: @token }, status: :created
+    else
+      render json: { error: 'failed to create buyer' }, status: :unprocessable_entity
     end
+  end
 
     def update
         buyer = find_buyer
@@ -27,7 +37,7 @@ class BuyersController < ApplicationController
     def destroy
         buyer = find_buyer
         buyer.destroy
-        head: no_content
+        head :no_content
     end
 
     private
@@ -41,7 +51,7 @@ class BuyersController < ApplicationController
     end
 
     def buyer_params
-        params.require(:buyer).permit(:username, :fullname, :email, :contact, :avatar, :password)
+        params.require(:buyer).permit(:buyername, :fullname, :email, :contact, :avatar, :password)
     end
 
     def unprocessable_entity(invalid)
@@ -49,7 +59,15 @@ class BuyersController < ApplicationController
     end
 
     def handle_errors
-        render json: { "Unpermitted Parameters".params.to_unsafe_h.except(:controller, :action, :id, :username, :fullname, :email, :contact, :avatar, :password).keys}, status: :unprocessable_entity
+        unpermitted_params = params.except(:controller, :action, :id, :username, :fullname, :email, :contact, :avatar, :budget, :subscription_package, :password).keys
+        render json: { "Unpermitted Parameters": unpermitted_params }, status: :unprocessable_entity
+    end
+      
+
+    private
+
+    def buyer_params
+        params.require(:user).permit(:username, :fullname, :email, :contact, :avatar, :budget, :subscription_package, :password)
     end
 
 end
