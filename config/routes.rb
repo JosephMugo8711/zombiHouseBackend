@@ -6,7 +6,13 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  #buyers
+  post 'buyerlogin', to: 'buyers#login'
+  post 'buyersignup', to: 'buyers#create'
+
+  # mpesa
   post 'stkpush', to: 'subs_mpesas#stkpush'
   get 'stkpush', to: 'subs_mpesas#stkpush'
-  post 'buyerlogin', to: 'buyers#login'
+ 
 end

@@ -28,7 +28,7 @@ class PropertiesController < ApplicationController
     def destroy
         property = find_property
         property.destroy
-        head: no_content
+        head :no_content
     end
 
     private
@@ -50,6 +50,7 @@ class PropertiesController < ApplicationController
     end
 
     def handle_errors
-        render json: { "Unpermitted Parameters".params.to_unsafe_h.except(:controller, :action, :id, :username, :fullname, :email, :contact, :avatar, :password).keys}, status: :unprocessable_entity
-    end
+        render json: { "Unpermitted Parameters": params.to_unsafe_h.except(:controller, :action, :id, :username, :fullname, :email, :contact, :avatar, :password).keys }, status: :unprocessable_entity
+      end
+      
 end

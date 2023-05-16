@@ -12,7 +12,7 @@ gem "sqlite3", "~> 1.4"
 gem 'rack-cors'
 gem 'rest-client'
 
-gem 'jwt'
+
 
 gem 'faker'
 
