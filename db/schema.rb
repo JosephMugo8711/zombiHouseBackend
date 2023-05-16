@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_12_203736) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_202824) do
   create_table "access_tokens", force: :cascade do |t|
     t.string "token"
     t.datetime "created_at", null: false
@@ -46,16 +46,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_203736) do
   create_table "properties", force: :cascade do |t|
     t.string "location"
     t.decimal "price"
-    t.integer "seller_id", null: false
-    t.integer "buyer_id", null: false
+    t.integer "seller_id"
+    t.integer "buyer_id"
     t.string "status"
     t.string "property_type"
+    t.string "image"
     t.text "description"
     t.integer "size_in_sqft"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["buyer_id"], name: "index_properties_on_buyer_id"
-    t.index ["seller_id"], name: "index_properties_on_seller_id"
   end
 
   create_table "sellers", force: :cascade do |t|
@@ -107,8 +106,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_203736) do
     t.index ["subscription_package_id"], name: "index_transactions_on_subscription_package_id"
   end
 
-  add_foreign_key "properties", "buyers"
-  add_foreign_key "properties", "sellers"
   add_foreign_key "transactions", "admins"
   add_foreign_key "transactions", "buyers"
   add_foreign_key "transactions", "sellers"

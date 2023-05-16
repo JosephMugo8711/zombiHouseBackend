@@ -28,6 +28,18 @@ class BuyersController < ApplicationController
     end
   end
 
+  def login
+    @buyer = Buyer.find_by(username: buyer_login_params[:username])
+    #buyer#authenticate comes from BCrypt
+    if @buyer && @buyer.authenticate(buyer_login_params[:password])
+      # encode token comes from ApplicationController
+      token = encode_token({ buyer_id: @buyer.id })
+      render json: { buyer: BuyerSerializer.new(@buyer), jwt: token }, status: :accepted
+    else
+      render json: { message: 'Invalid username or password' }, status: :unauthorized
+    end
+  end
+
     def update
         buyer = find_buyer
         buyer.update!(buyer_params)
@@ -51,7 +63,7 @@ class BuyersController < ApplicationController
     end
 
     def buyer_params
-        params.require(:buyer).permit(:buyername, :fullname, :email, :contact, :avatar, :password)
+        params.require(:buyer).permit(:username, :fullname, :email, :contact, :avatar, :password)
     end
 
     def unprocessable_entity(invalid)
@@ -67,7 +79,13 @@ class BuyersController < ApplicationController
     private
 
     def buyer_params
-        params.require(:user).permit(:username, :fullname, :email, :contact, :avatar, :budget, :subscription_package, :password)
+        params.require(:buyer).permit(:username, :fullname, :email, :contact, :avatar, :budget, :subscription_package, :password)
     end
+
+    def buyer_login_params
+        # params { user: {username: 'Chandler Bing', password: 'hi' } }
+        params.require(:buyer).permit(:username, :password)
+    end
+    
 
 end

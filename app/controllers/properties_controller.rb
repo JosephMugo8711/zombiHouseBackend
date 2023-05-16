@@ -1,3 +1,4 @@
+
 class PropertiesController < ApplicationController
 
     rescue_from ActiveRecord::RecordNotFound, with: :property_not_found

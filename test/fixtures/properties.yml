@@ -3,17 +3,21 @@
 one:
   location: MyString
   price: 9.99
-  seller: one
+  seller_id: 1
+  buyer_id: 1
   status: MyString
   property_type: MyString
+  image: MyString
   description: MyText
   size_in_sqft: 1
 
 two:
   location: MyString
   price: 9.99
-  seller: two
+  seller_id: 1
+  buyer_id: 1
   status: MyString
   property_type: MyString
+  image: MyString
   description: MyText
   size_in_sqft: 1
