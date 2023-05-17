@@ -64,19 +64,63 @@ require 'faker'
 #   )
 # end
 
-Buyer.create([
+User.create([
   {
     "username": "jowamu",
      "fullname": "joseph Wamiti",
      "email": "jose@gmail.com",
+     "role": "buyer",
      "contact": "000000",
       "avatar": "https://robohash.org/repellatquibusdamet.png?size=300x300&set=set1",
        "budget": "1000000",
-    "subscription_package": "minus",
-     "password": "12345678"
+    "subscription_package": "Basic Package",
+    "password_digest": BCrypt::Password.create("12345678"),
 
   }
 ])
+# packages = [
+#   'Basic Package',
+#   'Standard Package',
+#   'Premium Package',
+#   'Pro Package',
+#   'Agent Package',
+#   'Advertiser Package',
+#   'Exclusive Package'
+# ]
+
+# 40.times do
+#   role = User::ROLES.sample
+
+#   if role == 'buyer'
+#     User.create!(
+#       username: Faker::Internet.username,
+#       fullname: Faker::Name.name,
+#       email: Faker::Internet.email,
+#       contact: Faker::PhoneNumber.phone_number,
+#       budget: rand(1000..10000),
+#       role: role,
+#       subscription_package: packages.sample,
+#       password_digest: BCrypt::Password.create("password"),
+#       avatar: Faker::Avatar.image
+#     )
+#   elsif role == 'seller'
+#     User.create!(
+#       company_name: Faker::Company.name,
+#       location: Faker::Address.city,
+#       role: role,
+#       subscription_package: packages.sample,
+#       password_digest: BCrypt::Password.create("password"),
+#       avatar: Faker::Avatar.image
+#     )
+#   elsif role == 'admin'
+#     User.create!(
+#       role: role,
+#       subscription_package: packages.sample,
+#       password_digest: BCrypt::Password.create("password"),
+#       avatar: Faker::Avatar.image
+#     )
+#   end
+# end
 
 
 
