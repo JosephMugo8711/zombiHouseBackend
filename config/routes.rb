@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :properties
   resources :subs_mpesas
   resources :buyers
@@ -8,8 +9,8 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   #buyers
-  post 'buyerlogin', to: 'buyers#login'
-  post 'buyersignup', to: 'buyers#create'
+  post 'userlogin', to: 'users#create'
+  # post 'buyersignup', to: 'buyers#create'
 
   # mpesa
   post 'stkpush', to: 'subs_mpesas#stkpush'
